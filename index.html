@@ -310,14 +310,14 @@
     const ctx = canvas.getContext('2d');
 
     const NAME_BOX = {
-      rightPercent: 5.7,
-      topPercent: 34.6,
-      widthPercent: 32.2,
-      heightPercent: 5.0,
-      paddingRight: 18,
-      color: '#1a69e4',
-      fontSize: 52
-    };
+  rightPercent: 5.7,
+  topPercent: 34.6,
+  widthPercent: 32.2,
+  heightPercent: 5.0,
+  paddingRight: 18,
+  color: '#1a69e4',
+  fontSize: 74
+};
 
     function sanitizeName(value){
       return (value || '').replace(/\s+/g, ' ').trim().slice(0, 24);
@@ -329,16 +329,16 @@
     }
 
     function fitFontSize(text, maxWidth, startSize){
-      let size = startSize;
-      while(size > 18){
-        ctx.font = `700 ${size}px "IBM Plex Sans Arabic", Arial, sans-serif`;
-        if(ctx.measureText(text).width <= maxWidth){
-          return size;
-        }
-        size -= 1;
-      }
+  let size = startSize;
+  while(size > 34){
+    ctx.font = `700 ${size}px "IBM Plex Sans Arabic", Arial, sans-serif`;
+    if(ctx.measureText(text).width <= maxWidth){
       return size;
     }
+    size -= 1;
+  }
+  return size;
+}
 
     async function drawCard(){
       const img = new Image();
