@@ -310,10 +310,10 @@
     const ctx = canvas.getContext('2d');
 
     const NAME_BOX = {
-      x: 854,
-      y: 692,
-      width: 442,
-      height: 103,
+      rightPercent: 5.7,
+      topPercent: 34.6,
+      widthPercent: 32.2,
+      heightPercent: 5.0,
       paddingRight: 18,
       color: '#1a69e4',
       fontSize: 52
@@ -359,9 +359,14 @@
       const entered = sanitizeName(input.value);
       if (!entered) return;
 
-      const rightX = NAME_BOX.x + NAME_BOX.width - NAME_BOX.paddingRight;
-      const centerY = NAME_BOX.y + NAME_BOX.height / 2;
-      const size = fitFontSize(entered, NAME_BOX.width - 24, NAME_BOX.fontSize);
+      const boxWidth = img.naturalWidth * (NAME_BOX.widthPercent / 100);
+      const boxHeight = img.naturalHeight * (NAME_BOX.heightPercent / 100);
+      const boxX = img.naturalWidth - (img.naturalWidth * (NAME_BOX.rightPercent / 100)) - boxWidth;
+      const boxY = img.naturalHeight * (NAME_BOX.topPercent / 100);
+
+      const rightX = boxX + boxWidth - NAME_BOX.paddingRight;
+      const centerY = boxY + (boxHeight / 2);
+      const size = fitFontSize(entered, boxWidth - 24, NAME_BOX.fontSize);
 
       ctx.save();
       ctx.fillStyle = NAME_BOX.color;
