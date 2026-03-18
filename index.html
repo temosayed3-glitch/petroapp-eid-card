@@ -61,7 +61,7 @@
 
     .layout{
       display:grid;
-      grid-template-columns:minmax(320px, 700px) minmax(320px, 460px);
+      grid-template-columns:minmax(320px, 460px) minmax(320px, 700px);
       gap:28px;
       align-items:start;
     }
@@ -102,7 +102,7 @@
       padding-right:14px;
       color:#1a69e4;
       font-weight:700;
-      font-size:clamp(20px, 2.65vw, 44px);
+      font-size:clamp(18px, 2.25vw, 36px);
       line-height:1;
       direction:rtl;
       text-align:right;
@@ -233,7 +233,7 @@
       }
 
       .controls{
-        order:-1;
+        order:0;
       }
 
       .card-panel{
@@ -259,25 +259,18 @@
 <body>
   <div class="page">
     <div class="topbar">
-      <div class="badge">✨ بطاقة تهنئة العيد من PetroApp</div>
       <img class="brand-logo" src="petroapp-logo.png" alt="PetroApp Logo">
+      <div class="badge">✨ بطاقة تهنئة العيد من PetroApp</div>
     </div>
 
     <div class="layout">
-      <section class="card-panel">
-        <div class="card-wrap" id="cardWrap">
-          <img id="cardImage" src="card-template.jpg" alt="بطاقة العيد">
-          <div class="name-on-card" id="cardName">تميم سيد</div>
-        </div>
-      </section>
-
       <section class="controls">
         <div class="mini-badge">صمم بطاقتك في ثواني</div>
         <h1>عيدكم مبارك<br>أيامكم فرح،<br>وقلوبكم رضا</h1>
         <p class="desc">في العيد التفاصيل الصغيرة تصنع الذكرى واسمك أحد أجمل هذه التفاصيل</p>
 
         <label for="nameInput">الاسم على البطاقة</label>
-        <input id="nameInput" type="text" placeholder="اكتب اسمك هنا" value="تميم سيد" maxlength="24">
+        <input id="nameInput" type="text" placeholder="اكتب اسمك هنا" value="" maxlength="24">
 
         <div class="actions">
           <button class="primary" id="generateBtn">إنشاء البطاقة</button>
@@ -300,6 +293,13 @@
           </div>
         </div>
       </section>
+
+      <section class="card-panel">
+        <div class="card-wrap" id="cardWrap">
+          <img id="cardImage" src="card-template.jpg" alt="بطاقة العيد">
+          <div class="name-on-card" id="cardName">اكتب اسمك هنا</div>
+        </div>
+      </section>
     </div>
   </div>
 
@@ -319,7 +319,7 @@
       height: 103,
       paddingRight: 16,
       color: '#1a69e4',
-      fontSize: 78
+      fontSize: 66
     };
 
     function sanitizeName(value){
@@ -327,13 +327,13 @@
     }
 
     function updatePreview(){
-      const name = sanitizeName(input.value) || 'تميم سيد';
-      cardName.textContent = name;
+      const name = sanitizeName(input.value);
+      cardName.textContent = name || 'اكتب اسمك هنا';
     }
 
     function fitFontSize(text, maxWidth, startSize){
       let size = startSize;
-      while(size > 28){
+      while(size > 24){
         ctx.font = `700 ${size}px "IBM Plex Sans Arabic", Arial, sans-serif`;
         if(ctx.measureText(text).width <= maxWidth){
           return size;
@@ -359,10 +359,12 @@
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(img, 0, 0);
 
-      const text = sanitizeName(input.value) || 'تميم سيد';
+      const entered = sanitizeName(input.value);
+      if (!entered) return;
+
       const rightX = NAME_BOX.x + NAME_BOX.width - NAME_BOX.paddingRight;
       const centerY = NAME_BOX.y + NAME_BOX.height / 2;
-      const size = fitFontSize(text, NAME_BOX.width - 24, NAME_BOX.fontSize);
+      const size = fitFontSize(entered, NAME_BOX.width - 24, NAME_BOX.fontSize);
 
       ctx.save();
       ctx.fillStyle = NAME_BOX.color;
@@ -370,7 +372,7 @@
       ctx.textAlign = 'right';
       ctx.textBaseline = 'middle';
       ctx.font = `700 ${size}px "IBM Plex Sans Arabic", Arial, sans-serif`;
-      ctx.fillText(text, rightX, centerY);
+      ctx.fillText(entered, rightX, centerY);
       ctx.restore();
     }
 
