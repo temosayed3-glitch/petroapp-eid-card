@@ -27,16 +27,16 @@
 }
 
     .page{
-      width:min(1280px, calc(100% - 32px));
-      margin:26px auto 40px;
+      width:min(1160px, calc(100% - 24px));
+      margin:14px auto 18px;
     }
 
     .topbar{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:16px;
-      margin-bottom:22px;
+      gap:10px;
+      margin-bottom:14px;
     }
 
     .badge{
@@ -46,47 +46,47 @@
       background:#e8f0ff;
       color:var(--brand);
       border-radius:999px;
-      padding:10px 16px;
-      font-size:18px;
+      padding:8px 14px;
+      font-size:16px;
       font-weight:700;
       white-space:nowrap;
     }
 
     .brand-logo{
-      width:min(280px, 34vw);
+      width:min(220px, 28vw);
       height:auto;
       display:block;
     }
 
     .layout{
       display:grid;
-      grid-template-columns:minmax(320px, 460px) minmax(320px, 700px);
-      gap:28px;
+      grid-template-columns:minmax(300px, 430px) minmax(320px, 620px);
+      gap:20px;
       align-items:start;
     }
 
     .card-panel, .controls{
       background:var(--panel);
       border:1px solid var(--line);
-      border-radius:28px;
+      border-radius:24px;
       box-shadow:0 18px 40px rgba(23, 60, 130, 0.08);
     }
 
     .card-panel{
-      padding:20px;
+      padding:14px;
     }
 
     .card-wrap{
       position:relative;
       width:100%;
-      max-width:660px;
+      max-width:590px;
       margin:auto;
     }
 
     .card-wrap img{
       width:100%;
       display:block;
-      border-radius:22px;
+      border-radius:18px;
     }
 
     .name-on-card{
@@ -95,22 +95,20 @@
       top:33.8%;
       width:32.2%;
       height:5.0%;
-      display:flex;
-      align-items:center;
-      justify-content:flex-end;
       padding-right:14px;
       color:#1a69e4;
       font-weight:700;
-      font-size:clamp(18px, 2.25vw, 36px);
+      font-size:clamp(16px, 1.7vw, 28px);
       line-height:1;
       direction:rtl;
       text-align:right;
+      unicode-bidi:plaintext;
       white-space:nowrap;
       overflow:hidden;
     }
 
     .controls{
-      padding:28px 30px 24px;
+      padding:18px 22px 18px;
       text-align:right;
     }
 
@@ -121,42 +119,42 @@
       background:#e8f0ff;
       color:var(--brand);
       border-radius:999px;
-      padding:10px 16px;
-      font-size:17px;
+      padding:8px 14px;
+      font-size:15px;
       font-weight:700;
       margin-bottom:18px;
     }
 
     h1{
       margin:0 0 14px;
-      font-size:clamp(28px, 4.2vw, 76px);
+      font-size:clamp(24px, 3.2vw, 56px);
       line-height:1.03;
       color:#17285d;
       font-weight:700;
     }
 
     .desc{
-      margin:0 0 22px;
-      font-size:clamp(18px, 1.45vw, 30px);
-      line-height:1.7;
+      margin:0 0 16px;
+      font-size:clamp(15px, 1.1vw, 22px);
+      line-height:1.55;
       color:#7a88a8;
       font-weight:500;
     }
 
     label{
       display:block;
-      margin-bottom:10px;
+      margin-bottom:8px;
       font-weight:700;
       color:#223872;
-      font-size:17px;
+      font-size:15px;
     }
 
     input{
       width:100%;
       border:2px solid #73a1ef;
-      border-radius:20px;
-      padding:18px 20px;
-      font-size:30px;
+      border-radius:16px;
+      padding:14px 16px;
+      font-size:22px;
       font-family:inherit;
       color:#17285d;
       background:#fff;
@@ -173,8 +171,8 @@
     .actions{
       display:grid;
       grid-template-columns:1fr 1fr 1fr;
-      gap:12px;
-      margin-bottom:18px;
+      gap:10px;
+      margin-bottom:14px;
     }
 
     button{
@@ -182,7 +180,7 @@
       border-radius:18px;
       padding:15px 16px;
       font-family:inherit;
-      font-size:18px;
+      font-size:16px;
       font-weight:700;
       cursor:pointer;
       transition:transform .12s ease, opacity .12s ease;
@@ -202,9 +200,9 @@
     .step{
       background:#fff;
       border:1px solid #dbe4f3;
-      border-radius:20px;
-      padding:16px 14px;
-      min-height:124px;
+      border-radius:16px;
+      padding:12px 12px;
+      min-height:98px;
     }
 
     .step h3{
@@ -216,8 +214,8 @@
 
     .step p{
       margin:0;
-      font-size:15px;
-      line-height:1.7;
+      font-size:13px;
+      line-height:1.5;
       color:#8a96b0;
       font-weight:500;
     }
@@ -316,9 +314,9 @@
       y: 692,
       width: 442,
       height: 103,
-      paddingRight: 16,
+      paddingRight: 18,
       color: '#1a69e4',
-      fontSize: 66
+      fontSize: 52
     };
 
     function sanitizeName(value){
@@ -332,7 +330,7 @@
 
     function fitFontSize(text, maxWidth, startSize){
       let size = startSize;
-      while(size > 24){
+      while(size > 18){
         ctx.font = `700 ${size}px "IBM Plex Sans Arabic", Arial, sans-serif`;
         if(ctx.measureText(text).width <= maxWidth){
           return size;
