@@ -305,12 +305,11 @@
     const canvas = document.getElementById('exportCanvas');
     const ctx = canvas.getContext('2d');
 
-    const NAME_BOX = {
-  rightPercent: 5.7,
-  topPercent: 34,
-  widthPercent: 32.2,
-  heightPercent: 5.0,
-  paddingRight: 18,
+  const NAME_BOX = {
+  rightPercent: 50, // نصفي العرض للوسط
+  topPercent: 88,   // مكان الاسم أسفل النص
+  widthPercent: 80, // ممتد تقريبًا حسب التصميم
+  heightPercent: 5,
   color: '#1a69e4',
   fontSize: 120
 };
@@ -369,7 +368,7 @@
   ctx.textAlign='center';
   ctx.textBaseline='middle';
   ctx.font = `700 ${size}px "IBM Plex Sans Arabic", Arial, sans-serif`;
-  ctx.fillText(entered, canvas.width/2, boxY);
+  ctx.fillText(entered, canvas.width / 2, canvas.height * (NAME_BOX.topPercent / 100));
   ctx.restore();
 }
 
