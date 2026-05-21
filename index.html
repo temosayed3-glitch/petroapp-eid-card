@@ -311,7 +311,7 @@
   widthPercent: 80, // ممتد تقريبًا حسب التصميم
   heightPercent: 5,
   color: '#1a69e4',
-  fontSize: 120
+  fontSize: 32 // حجم الخط مطابق للمعاينة
 };
 
     function sanitizeName(value){
@@ -360,7 +360,7 @@
   const boxX = (canvas.width - boxWidth)/2; // الاسم في النص بالعرض
   const boxY = canvas.height * (NAME_BOX.topPercent/100);
 
-  const size = fitFontSize(entered, boxWidth, NAME_BOX.fontSize);
+  const size = NAME_BOX.fontSize; // استخدم حجم الخط المحدد مباشرة
 
   ctx.save();
   ctx.fillStyle = NAME_BOX.color;
