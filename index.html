@@ -337,40 +337,50 @@
 }
 
     async function drawCard(){
-      const img = new Image();
-      img.crossOrigin = 'anonymous';
-      img.src = cardImage.src;
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.src = cardImage.src;
 
-      await new Promise((resolve, reject) => {
-        img.onload = resolve;
-        img.onerror = reject;
-      });
-      canvas.width = 1080;   // عرض التصميم الجديد
-      canvas.height = 1440;  // طول التصميم الجديد
+  await new Promise((resolve,reject)=>{
+    img.onload=resolve;
+    img.onerror=reject;
+  });
 
-      // استخدم نفس NAME_BOX المعدل
-      const boxWidth = canvas.width * (NAME_BOX.widthPercent/100);
-      const boxHeight = canvas.height * (NAME_BOX.heightPercent/100);
-      const boxX = canvas.width - (canvas.width*(NAME_BOX.rightPercent/100)) - boxWidth;
-      const boxY = canvas.height * (NAME_BOX.topPercent/100); 
-    
-      ctx.save();
-      ctx.fillStyle = NAME_BOX.color;
-      ctx.direction = 'rtl';
-      ctx.textAlign = 'right';
-      ctx.textBaseline = 'middle';
-      ctx.font = `700 ${size}px "IBM Plex Sans Arabic", Arial, sans-serif`;
-      ctx.fillText(entered, rightX, centerY);
-      ctx.restore();
-    }
+  // مقاسات التصميم الجديد
+  canvas.width = 1080;
+  canvas.height = 1440;
 
-    async function downloadCard(){
-      await drawCard();
-      const link = document.createElement('a');
-      link.download = 'petroapp-eid-card.png';
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-    }
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.drawImage(img,0,0,canvas.width,canvas.height);
+
+  const entered = sanitizeName(input.value);
+  if(!entered) return;
+
+  const boxWidth = canvas.width * (NAME_BOX.widthPercent/100);
+  const boxHeight = canvas.height * (NAME_BOX.heightPercent/100);
+  const boxX = (canvas.width - boxWidth)/2; // الاسم في النص بالعرض
+  const boxY = canvas.height * (NAME_BOX.topPercent/100);
+
+  const size = fitFontSize(entered, boxWidth, NAME_BOX.fontSize);
+
+  ctx.save();
+  ctx.fillStyle = NAME_BOX.color;
+  ctx.direction='rtl';
+  ctx.textAlign='center';
+  ctx.textBaseline='middle';
+  ctx.font = `700 ${size}px "IBM Plex Sans Arabic", Arial, sans-serif`;
+  ctx.fillText(entered, canvas.width/2, boxY);
+  ctx.restore();
+}
+
+async function downloadCard(){
+  await drawCard();
+  const link = document.createElement('a');
+  link.download='petroapp-eid-card.png';
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}
+  
 
     document.getElementById('generateBtn').addEventListener('click', updatePreview);
     document.getElementById('downloadBtn').addEventListener('click', downloadCard);
