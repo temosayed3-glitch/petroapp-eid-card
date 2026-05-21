@@ -346,20 +346,14 @@
         img.onerror = reject;
       });
 
-      canvas.width = img.naturalWidth;
-      canvas.height = img.naturalHeight;
+     canvas.width = 1080;   // عرض التصميم الجديد
+canvas.height = 1440;  // طول التصميم الجديد
 
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(img, 0, 0);
-
-      const entered = sanitizeName(input.value);
-      if (!entered) return;
-
-      const boxWidth = img.naturalWidth * (NAME_BOX.widthPercent / 100);
-      const boxHeight = img.naturalHeight * (NAME_BOX.heightPercent / 100);
-      const boxX = img.naturalWidth - (img.naturalWidth * (NAME_BOX.rightPercent / 100)) - boxWidth;
-      const boxY = img.naturalHeight * (NAME_BOX.topPercent / 100);
-
+// استخدم نفس NAME_BOX المعدل
+const boxWidth = canvas.width * (NAME_BOX.widthPercent/100);
+const boxHeight = canvas.height * (NAME_BOX.heightPercent/100);
+const boxX = canvas.width - (canvas.width*(NAME_BOX.rightPercent/100)) - boxWidth;
+const boxY = canvas.height * (NAME_BOX.topPercent/100);
       const rightX = boxX + boxWidth - NAME_BOX.paddingRight;
       const centerY = boxY + (boxHeight / 2);
       const size = fitFontSize(entered, boxWidth - 24, NAME_BOX.fontSize);
