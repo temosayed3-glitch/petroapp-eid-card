@@ -345,19 +345,16 @@
         img.onload = resolve;
         img.onerror = reject;
       });
+      canvas.width = 1080;   // عرض التصميم الجديد
+      canvas.height = 1440;  // طول التصميم الجديد
 
-     canvas.width = 1080;   // عرض التصميم الجديد
-canvas.height = 1440;  // طول التصميم الجديد
-
-// استخدم نفس NAME_BOX المعدل
-const boxWidth = canvas.width * (NAME_BOX.widthPercent/100);
-const boxHeight = canvas.height * (NAME_BOX.heightPercent/100);
-const boxX = canvas.width - (canvas.width*(NAME_BOX.rightPercent/100)) - boxWidth;
-const boxY = canvas.height * (NAME_BOX.topPercent/100);
-      const rightX = boxX + boxWidth - NAME_BOX.paddingRight;
-      const centerY = boxY + (boxHeight / 2);
-      const size = fitFontSize(entered, boxWidth - 24, NAME_BOX.fontSize);
-
+      // استخدم نفس NAME_BOX المعدل
+      const boxWidth = canvas.width * (NAME_BOX.widthPercent/100);
+      const boxHeight = canvas.height * (NAME_BOX.heightPercent/100);
+      const boxX = canvas.width - (canvas.width*(NAME_BOX.rightPercent/100)) - boxWidth;
+      const boxY = canvas.height * (NAME_BOX.topPercent/100); 
+    }
+    
       ctx.save();
       ctx.fillStyle = NAME_BOX.color;
       ctx.direction = 'rtl';
